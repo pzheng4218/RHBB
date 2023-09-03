@@ -116,6 +116,7 @@ gamma2 = 0.8
 #     p_list.append(p)
 
 
+# You may set \tau=2 or 3 based on different data sets.
 p_list = []
 p1 = 0
 for j in range(holder.num):

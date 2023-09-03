@@ -100,6 +100,7 @@ gamma2 = 0.8
 sigma1 = 0.6
 sigma2 = 0.2
 
+# You can set \tau=2 or 3 based on different data sets
 p_list = []
 p1 = 0
 for j in range(holder.num):
@@ -159,8 +160,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 2 + ita2 * (1 - 2)
         omega_old = omega
@@ -219,8 +221,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 2 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-2 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega
@@ -279,8 +282,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 + ita2 * (1-3)
         omega_old = omega
@@ -340,8 +344,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-3 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega
@@ -400,8 +405,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 4 + ita2 * (1-4)
         omega_old = omega
@@ -461,8 +467,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 4 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-4 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega
@@ -521,8 +528,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 5 + ita2 * (1-5)
         omega_old = omega
@@ -582,8 +590,9 @@ for k in range(1, outer_epoch+1):
         s = omega - omega_old
         y = holder.logistic_indiv_grad2(omega, p_list, batch_bh) - holder.logistic_indiv_grad2(omega_old, p_list,
                                                                                              batch_bh)
+        y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
         ita1 = (1 / h) * gamma2 * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y)
-        ita2 = (1 / h) * gamma2 * (s.dot(y)) / (np.linalg.norm(y, ord=2) ** 2)
+        ita2 = (1 / h) * gamma2 * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 5 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-5 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega

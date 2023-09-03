@@ -83,6 +83,8 @@ eta_0 = 1
 # mS2GD-RHBB(3)-unvaried
 size_b = 4
 size_bh = 40
+size_bh2 = 40
+h = max(size_bh, size_bh2)
 inner_loop = 100
 outer_epoch = 20
 gamma = 1
@@ -105,12 +107,12 @@ for k in range(1, outer_epoch+1):
         batch_b = random.sample(list(range(holder.num)), size_b)
         v = holder.logistic_indiv_grad(omega, batch_b) - holder.logistic_indiv_grad(w_ref, batch_b) + phi
         batch_bh = random.sample(list(range(holder.num)), size_bh)
-        batch_bh2 = random.sample(list(range(holder.num)), size_bh)
+        batch_bh2 = random.sample(list(range(holder.num)), size_bh2)
         s = omega - omega_old
         y1 = holder.logistic_indiv_grad(omega, batch_bh) - holder.logistic_indiv_grad(omega_old, batch_bh)
-        ita1 = (1 / size_bh) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
+        ita1 = (1 / h) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
         y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
-        ita2 = (1 / size_bh) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
+        ita2 = (1 / h) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 + ita2 * (-2)
         omega_old = omega
@@ -125,6 +127,8 @@ for k in range(1, outer_epoch+1):
 # MB-SARAH-RHBB(3)-unvaried
 size_b = 4
 size_bh = 40
+size_bh2 = 40
+h = max(size_bh, size_bh2)
 inner_loop = 100
 outer_epoch = 20
 gamma = 1
@@ -146,12 +150,12 @@ for k in range(1, outer_epoch+1):
         batch_b = random.sample(list(range(holder.num)), size_b)
         v = holder.logistic_indiv_grad(omega, batch_b) - holder.logistic_indiv_grad(omega_old, batch_b) + v
         batch_bh = random.sample(list(range(holder.num)), size_bh)
-        batch_bh2 = random.sample(list(range(holder.num)), size_bh)
+        batch_bh2 = random.sample(list(range(holder.num)), size_bh2)
         s = omega - omega_old
         y1 = holder.logistic_indiv_grad(omega, batch_bh) - holder.logistic_indiv_grad(omega_old, batch_bh)
-        ita1 = (1 / size_bh) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
+        ita1 = (1 / h) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
         y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
-        ita2 = (1 / size_bh) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
+        ita2 = (1 / h) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 + ita2 * (-2)
         omega_old = omega
@@ -377,6 +381,7 @@ w_ref_old = np.array([0.]*holder.dim)
 eta = 0
 S9 = []
 SS9 = []
+D9 = []
 for k in range(1, outer_epoch+1):
     if k > 1:
         eta1 = (1/inner_loop) * (np.linalg.norm(w_ref - w_ref_old, ord=2)**2 / (w_ref - w_ref_old).dot(holder.logistic_indiv_grad(w_ref)-holder.logistic_indiv_grad(w_ref_old)))
@@ -408,6 +413,8 @@ for k in range(1, outer_epoch+1):
 # mS2GD-RHBB(3)-adaptive
 size_b = 4
 size_bh = 40
+size_bh2 = 40
+h = max(size_bh, size_bh2)
 inner_loop = 100
 outer_epoch = 20
 gamma = 1
@@ -432,12 +439,12 @@ for k in range(1, outer_epoch+1):
         batch_b = random.sample(list(range(holder.num)), size_b)
         v = holder.logistic_indiv_grad(omega, batch_b) - holder.logistic_indiv_grad(w_ref, batch_b) + phi
         batch_bh = random.sample(list(range(holder.num)), size_bh)
-        batch_bh2 = random.sample(list(range(holder.num)), size_bh)
+        batch_bh2 = random.sample(list(range(holder.num)), size_bh2)
         s = omega - omega_old
         y1 = holder.logistic_indiv_grad(omega, batch_bh) - holder.logistic_indiv_grad(omega_old, batch_bh)
-        ita1 = (1 / size_bh) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
+        ita1 = (1 / h) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
         y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
-        ita2 = (1 / size_bh) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
+        ita2 = (1 / h) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-3 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega
@@ -452,6 +459,8 @@ for k in range(1, outer_epoch+1):
 # MB-SARAH-RHBB(3)-adaptive
 size_b = 4
 size_bh = 40
+size_bh2 = 40
+h = max(size_bh, size_bh2)
 inner_loop = 100
 outer_epoch = 20
 gamma = 1
@@ -475,12 +484,12 @@ for k in range(1, outer_epoch+1):
         batch_b = random.sample(list(range(holder.num)), size_b)
         v = holder.logistic_indiv_grad(omega, batch_b) - holder.logistic_indiv_grad(omega_old, batch_b) + v
         batch_bh = random.sample(list(range(holder.num)), size_bh)
-        batch_bh2 = random.sample(list(range(holder.num)), size_bh)
+        batch_bh2 = random.sample(list(range(holder.num)), size_bh2)
         s = omega - omega_old
         y1 = holder.logistic_indiv_grad(omega, batch_bh) - holder.logistic_indiv_grad(omega_old, batch_bh)
-        ita1 = (1 / size_bh) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
+        ita1 = (1 / h) * gamma * (np.linalg.norm(s, ord=2) ** 2) / s.dot(y1)
         y2 = holder.logistic_indiv_grad(omega, batch_bh2) - holder.logistic_indiv_grad(omega_old, batch_bh2)
-        ita2 = (1 / size_bh) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
+        ita2 = (1 / h) * gamma * (s.dot(y2)) / (np.linalg.norm(y2, ord=2) ** 2)
         # ita = np.sqrt(ita1*ita2)
         ita = ita1 * 3 ** (1+1/(sigma1*k+sigma2*j)) + ita2 * (1-3 ** (1+1/(sigma1*k+sigma2*j)))
         omega_old = omega
@@ -522,7 +531,7 @@ line7, = plt.semilogy(pass7, SS7, linestyle='--', linewidth=2, color='olivedrab'
 line8, = plt.semilogy(pass8, SS8, linestyle=':', linewidth=2, color='peru', label=r'SARAH+')
 line9, = plt.semilogy(pass9, SS9, linestyle=':', linewidth=2, color='steelblue', label=r'SVRG-ABB')
 line10, = plt.semilogy(pass10, SS10, linestyle='-', linewidth=2, color='teal', label=r'mS2GD-RHBB(3) $\sigma_1=0.8$ $\sigma_2=0.8$')
-line11, = plt.semilogy(pass11, SS11, linestyle='-', linewidth=2, color='blue', label=r'MB-MB-SARAH-RHBB(3) $\sigma_1=0.8$ $\sigma_2=0.8$')
+line11, = plt.semilogy(pass11, SS11, linestyle='-', linewidth=2, color='blue', label=r'MB-SARAH-RHBB(3) $\sigma_1=0.8$ $\sigma_2=0.8$')
 font1 = {'size': 7}
 plt.legend(handles=[line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11], prop=font1)
 # plt.savefig('ada_hexin_phishing.eps', dpi=600, format='eps')

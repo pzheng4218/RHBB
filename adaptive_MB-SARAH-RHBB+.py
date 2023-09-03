@@ -104,9 +104,9 @@ sigma2 = 0.2
 p_list = []
 p1 = 0
 for j in range(holder.num):
-    p1 += np.linalg.norm(holder.train_set[0][j], ord=np.inf)**3
+    p1 += np.linalg.norm(holder.train_set[0][j], ord=np.inf)**2
 for j in range(holder.num):
-    p = np.linalg.norm(holder.train_set[0][j], ord=np.inf)**3 / p1
+    p = np.linalg.norm(holder.train_set[0][j], ord=np.inf)**2 / p1
     p_list.append(p)
 
 

@@ -237,7 +237,7 @@ plt.figure()
 plt.xlabel('Number of Effective Passes')
 plt.ylabel(r'$||\nabla P(w)||^2$')
 epochs = [int(i) for i in range(1, outer_epoch+1)]
-# the constants below are used for computing the effective passes with: constant = 1 + 2 * size_b * inner_loop / n
+# the constants below are used for computing the effective passes with: constant = 1 + 2 * size_b * inner_loop / nR
 pass1 = 1.006*np.array([int(i) for i in range(1, 21)])
 pass2 = 1.003*np.array([int(i) for i in range(1, 21)])
 pass3 = 1.003*np.array([int(i) for i in range(1, 21)])
